@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const { analyzeThreat } = require("../services/geminiService");
+
 /* =========================================
    CHECK ROUTE
 ========================================= */
@@ -33,4 +35,26 @@ router.post("/test", (req, res) => {
     body: req.body,
   });
 });
+
+/* =========================================
+   GEMINI THREAT ANALYSIS
+========================================= */
+router.post("/analyze", async (req, res) => {
+  try {
+    const analysis = await analyzeThreat(req.body);
+
+    res.json({
+      success: true,
+      analysis,
+    });
+  } catch (error) {
+    console.error("Analyze Error:", error);
+
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
 module.exports = router;
