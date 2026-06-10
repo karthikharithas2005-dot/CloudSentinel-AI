@@ -8,4 +8,6 @@ const CloudConnectionSchema = new mongoose.Schema({
   lastSync: String,
 });
 
-module.exports = mongoose.model("CloudConnection", CloudConnectionSchema);
+module.exports =
+  mongoose.models.CloudConnection ||
+  mongoose.model("CloudConnection", CloudConnectionSchema);

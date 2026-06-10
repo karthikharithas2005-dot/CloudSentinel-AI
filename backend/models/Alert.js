@@ -10,4 +10,4 @@ const AlertSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Alert", AlertSchema);
+module.exports = mongoose.models.Alert || mongoose.model("Alert", AlertSchema);
