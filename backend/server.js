@@ -23,18 +23,28 @@ app.use("/api/logs", logRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/cloud", cloudRoutes);
 
-// Test Routes
+// Root Route
 app.get("/", (req, res) => {
   res.send("CloudSentinel AI Backend Running");
 });
 
+// Test GET Route
 app.get("/hello", (req, res) => {
   res.send("HELLO WORKS");
 });
 
+// Test POST Route
 app.post("/test", (req, res) => {
   res.json({
     message: "Test route works",
+  });
+});
+
+// Debug POST Route
+app.post("/api/debug-post", (req, res) => {
+  res.json({
+    success: true,
+    body: req.body,
   });
 });
 
