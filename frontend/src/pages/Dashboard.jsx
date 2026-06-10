@@ -10,15 +10,16 @@ import {
 import Sidebar from "../components/Sidebar";
 import ThreatChart from "../components/ThreatChart";
 import TrendChart from "../components/TrendChart.jsx";
-
 import "../styles/dashboard.css";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Dashboard() {
   const [alerts, setAlerts] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/logs/alerts")
+      .get(`${API_URL}/api/logs/alerts`)
       .then((res) => {
         if (Array.isArray(res.data)) {
           setAlerts(res.data);
@@ -26,7 +27,9 @@ function Dashboard() {
           setAlerts(res.data.alerts);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("Failed to load alerts:", err);
+      });
   }, []);
 
   const critical = alerts.filter((a) => a.severity === "Critical").length;
