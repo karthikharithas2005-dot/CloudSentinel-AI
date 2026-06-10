@@ -48,6 +48,14 @@ app.post("/api/debug-post", (req, res) => {
   });
 });
 
+// API Test Route
+app.post("/api/test-post", (req, res) => {
+  res.json({
+    success: true,
+    message: "POST API works",
+  });
+});
+
 // Local development only
 const PORT = process.env.PORT || 5000;
 
