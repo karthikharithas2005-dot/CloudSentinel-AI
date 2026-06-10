@@ -8,10 +8,9 @@ const connectDB = async () => {
 
     console.log("MongoDB Connected");
   } catch (error) {
-    console.error("MongoDB Error:");
-    console.error(error);
+    console.error("MongoDB Error:", error.message);
 
-    process.exit(1);
+    // DO NOT EXIT ON VERCEL
   }
 };
 
