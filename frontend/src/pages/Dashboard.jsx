@@ -9,7 +9,7 @@ import {
 
 import Sidebar from "../components/Sidebar";
 import ThreatChart from "../components/ThreatChart";
-import TrendChart from "../components/TempChart.jsx";
+import TrendChart from "../components/TrendChart.jsx";
 
 import "../styles/dashboard.css";
 
