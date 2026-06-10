@@ -3,7 +3,19 @@ const router = express.Router();
 
 const { analyzeThreat } = require("../services/geminiService");
 
-// Analyze Single Alert
+/* ===================================
+   DEBUG ROUTE
+=================================== */
+router.get("/check", (req, res) => {
+  res.json({
+    success: true,
+    message: "AI Routes Loaded",
+  });
+});
+
+/* ===================================
+   ANALYZE SINGLE ALERT
+=================================== */
 router.post("/analyze", async (req, res) => {
   try {
     const alert = req.body;
@@ -28,26 +40,27 @@ router.post("/analyze", async (req, res) => {
   }
 });
 
-// Analyze Entire Environment
+/* ===================================
+   ANALYZE ENTIRE ENVIRONMENT
+=================================== */
 router.post("/environment", async (req, res) => {
   try {
-    const { alerts } = req.body;
+    const { alerts = [] } = req.body;
 
-    const critical =
-      alerts?.filter((a) => a.severity === "Critical").length || 0;
+    const critical = alerts.filter((a) => a.severity === "Critical").length;
 
-    const high = alerts?.filter((a) => a.severity === "High").length || 0;
+    const high = alerts.filter((a) => a.severity === "High").length;
 
-    const medium = alerts?.filter((a) => a.severity === "Medium").length || 0;
+    const medium = alerts.filter((a) => a.severity === "Medium").length;
 
-    const low = alerts?.filter((a) => a.severity === "Low").length || 0;
+    const low = alerts.filter((a) => a.severity === "Low").length;
 
     const prompt = `
 You are a Cloud Security Expert.
 
 Analyze this cloud environment:
 
-Total Alerts: ${alerts?.length || 0}
+Total Alerts: ${alerts.length}
 Critical Alerts: ${critical}
 High Alerts: ${high}
 Medium Alerts: ${medium}
