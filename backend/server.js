@@ -12,7 +12,7 @@ const cloudRoutes = require("./routes/cloudRoutes");
 const app = express();
 
 // Connect MongoDB
-//connectDB();
+connectDB();
 
 // Middleware
 app.use(cors());
