@@ -1,0 +1,114 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: #050b1f;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  margin-left: 20px;
+}
+
+.cloud-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.cloud-header h1 {
+  color: white;
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.cloud-header p {
+  color: #a7b4d4;
+  font-size: 18px;
+}
+
+.provider-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.provider-card {
+  background: #18233c;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.provider-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.4);
+}
+
+.provider-card h2 {
+  color: white;
+  margin-bottom: 15px;
+}
+
+.provider-card p {
+  color: #bfc8dc;
+  min-height: 70px;
+}
+
+.provider-card button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.provider-card button:hover {
+  opacity: 0.9;
+}
+
+.connected-section {
+  margin-top: 30px;
+}
+
+.connected-section h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.connections-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #18233c;
+}
+
+.connections-table th {
+  background: #233251;
+  color: white;
+  padding: 16px;
+}
+
+.connections-table td {
+  padding: 16px;
+  color: white;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.status-connected {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+  .provider-grid {
+    grid-template-columns: 1fr;
+  }
+}
