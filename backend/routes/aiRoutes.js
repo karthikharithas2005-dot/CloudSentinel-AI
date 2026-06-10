@@ -33,3 +33,4 @@ router.post("/test", (req, res) => {
     body: req.body,
   });
 });
+module.exports = router;
