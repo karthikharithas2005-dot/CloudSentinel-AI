@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const Alert = require("../models/Alert");
 const { analyzeThreat } = require("../services/geminiService");
 
 /* =========================================
@@ -26,29 +27,34 @@ router.get("/gemini-check", (req, res) => {
 });
 
 /* =========================================
-   TEST POST ROUTE
+   AI INSIGHTS USING GEMINI
 ========================================= */
-router.post("/test", (req, res) => {
-  res.json({
-    success: true,
-    message: "AI POST Route Works",
-    body: req.body,
-  });
-});
-
-/* =========================================
-   GEMINI THREAT ANALYSIS
-========================================= */
-router.post("/analyze", async (req, res) => {
+router.get("/insights", async (req, res) => {
   try {
-    const analysis = await analyzeThreat(req.body);
+    const alerts = await Alert.find().sort({ timestamp: -1 }).limit(5);
+
+    if (alerts.length === 0) {
+      return res.json({
+        success: true,
+        analysis:
+          "No security alerts found. Environment currently appears healthy.",
+      });
+    }
+
+    const formattedAlert = {
+      title: alerts.map((a) => a.threat).join(", "),
+      severity: alerts.map((a) => a.severity).join(", "),
+      description: JSON.stringify(alerts, null, 2),
+    };
+
+    const analysis = await analyzeThreat(formattedAlert);
 
     res.json({
       success: true,
       analysis,
     });
   } catch (error) {
-    console.error("Analyze Error:", error);
+    console.error("AI INSIGHTS ERROR:", error);
 
     res.status(500).json({
       success: false,
