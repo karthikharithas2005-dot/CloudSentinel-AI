@@ -1,18 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { FaShieldAlt, FaLock, FaUser } from "react-icons/fa";
 import "../styles/login.css";
 
 function Login() {
-  const navigate = useNavigate();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    if (username === "admin" && password === "cloud123") {
+    if (username.trim() === "admin" && password.trim() === "cloud123") {
       localStorage.setItem("isLoggedIn", "true");
-      navigate("/");
+
+      window.location.replace("/");
     } else {
       alert("Invalid Credentials");
     }
@@ -29,7 +27,6 @@ function Login() {
 
         <div className="input-group">
           <FaUser />
-
           <input
             type="text"
             placeholder="Username"
@@ -40,7 +37,6 @@ function Login() {
 
         <div className="input-group">
           <FaLock />
-
           <input
             type="password"
             placeholder="Password"

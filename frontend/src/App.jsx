@@ -12,9 +12,13 @@ import CloudConnections from "./pages/CloudConnections";
 
 import "./App.css";
 
-function App() {
+function ProtectedRoute({ children }) {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
+  return isLoggedIn === "true" ? children : <Navigate to="/login" replace />;
+}
+
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -24,47 +28,74 @@ function App() {
         {/* Dashboard */}
         <Route
           path="/"
-          element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
         />
 
         {/* Alerts */}
         <Route
           path="/alerts"
-          element={isLoggedIn ? <Alerts /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <Alerts />
+            </ProtectedRoute>
+          }
         />
 
         {/* Analytics */}
         <Route
           path="/analytics"
-          element={isLoggedIn ? <Analytics /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <Analytics />
+            </ProtectedRoute>
+          }
         />
 
         {/* AI Insights */}
         <Route
           path="/insights"
-          element={isLoggedIn ? <AIInsights /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <AIInsights />
+            </ProtectedRoute>
+          }
         />
 
         {/* Reports */}
         <Route
           path="/reports"
-          element={isLoggedIn ? <Reports /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <Reports />
+            </ProtectedRoute>
+          }
         />
 
         {/* Cloud Connections */}
         <Route
           path="/cloud"
-          element={isLoggedIn ? <CloudConnections /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <CloudConnections />
+            </ProtectedRoute>
+          }
         />
 
         {/* Settings */}
         <Route
           path="/settings"
-          element={isLoggedIn ? <Settings /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
         />
 
-        {/* Unknown Routes */}
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
